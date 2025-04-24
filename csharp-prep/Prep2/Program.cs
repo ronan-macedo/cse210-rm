@@ -1,10 +1,12 @@
+using System.Text;
+
 Console.WriteLine("Please provide your grade score: ");
 
-var gradeInput = int.TryParse(Console.ReadLine(), out int score);
+bool gradeInput = int.TryParse(Console.ReadLine(), out int score);
 
 if (!gradeInput || score > 100 || score < 0)
 {
-    Console.WriteLine("Your grade score should be less than 100 and higher than 0, or an integer.");
+    Console.WriteLine("Your grade score should be less than 100 and higher than 0, or an number.");
     return;
 }
 
@@ -28,40 +30,36 @@ static string CalculateGrade(int score)
         return "F";
     }
 
-    var baseGrade = string.Empty;
-    var scoreLastDigit = score % 10;
+    var baseGrade = new StringBuilder();
+    int scoreLastDigit = score % 10;
 
     if (score >= 90)
     {
-        baseGrade = scoreLastDigit < 3 ? "A-" : "A";
+        baseGrade = scoreLastDigit < 3 ? baseGrade.Append("A-") : baseGrade.Append('A');
     }
     else if (score >= 80)
     {
-        baseGrade = "B";
+        baseGrade = baseGrade.Append('B');
     }
     else if (score >= 70)
     {
-        baseGrade = "C";
+        baseGrade = baseGrade.Append('C');
     }
     else if (score >= 60)
     {
-        baseGrade = "D";
+        baseGrade = baseGrade.Append('D');
     }
 
     if (score >= 90)
     {
-        return baseGrade;
+        return baseGrade.ToString();
     }
     else if (scoreLastDigit >= 7)
     {
-        return baseGrade + "+";
-    }
-    else if (scoreLastDigit < 3)
-    {
-        return baseGrade + "-";
+        return baseGrade.Append('+').ToString();
     }
     else
     {
-        return baseGrade;
+        return scoreLastDigit < 3 ? baseGrade.Append('-').ToString() : baseGrade.ToString();
     }
 }
