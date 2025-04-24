@@ -1,12 +1,4 @@
-Console.WriteLine("What is your magic number?");
-
-bool magicNumberInput = int.TryParse(Console.ReadLine(), out int magicNumber);
-
-if (!magicNumberInput)
-{
-    Console.WriteLine("No magic number found.");
-}
-
+int magicNumber = Random.Shared.Next(1, 100);
 bool playGuessGame = true;
 
 while (playGuessGame)
@@ -18,14 +10,7 @@ while (playGuessGame)
 
     if (string.Equals(answer, "yes", StringComparison.OrdinalIgnoreCase))
     {
-        Console.WriteLine("What is your magic number?");
-        magicNumberInput = int.TryParse(Console.ReadLine(), out magicNumber);
-
-        if (!magicNumberInput)
-        {
-            Console.WriteLine("No magic number found.");
-            break;
-        }
+        magicNumber = Random.Shared.Next(1, 100);
     }
     else
     {
